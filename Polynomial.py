@@ -139,10 +139,18 @@ class Polynomial:
         pass
 
     def degree(self):
-        pass
+        return max(self.coefficients.keys())
 
     def der(self, d=1):
-        pass
+        res = self.coefficients
+        while d!=0 and d>0:
+            temp = {}
+            for k, i in res.items():
+                if i != 0:
+                    temp.update({k-1: k*i})
+            d-=1
+            res = temp
+        return Polynomial(res)
 
     def __mul__(self, other):
         pass
