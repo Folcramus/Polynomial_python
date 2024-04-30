@@ -118,7 +118,7 @@ class Polynomial:
         pass
 
     def __iter__(self):
-        pass
+        return self.coefficients.items().__iter__()
 
     def __next__(self):
-        pass
+        return next(self.coefficients.items().__iter__())
