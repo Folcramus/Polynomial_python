@@ -1,7 +1,7 @@
 from Polynomial import Polynomial
 
 
-a= Polynomial([7, -2, 0, 1]) - 3
+a= 3 -  Polynomial([7, -2, 0, 1])
 
 
 print(a)

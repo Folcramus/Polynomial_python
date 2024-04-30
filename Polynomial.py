@@ -9,7 +9,9 @@ class Polynomial:
             self.coefficients = {i: coefficients[i] for i in range(len(coefficients))}
 
     def __repr__(self):
-        pass
+        res = str(self.coefficients.values()).replace("dict_values(", "")
+        res = str(res.replace(")", ""))
+        return f'Polynomial {res}'
 
     def __str__(self):
         result = ""
@@ -30,67 +32,75 @@ class Polynomial:
 
     def __add__(self, other):
         result_poly = []
-        if isinstance(other, Polynomial):
-            for i in range(max(len(self.coefficients), len(other.coefficients))):
-                if i < len(self.coefficients):
-                    term1 = self.coefficients[i]
-                else:
-                    term1 = 0
-                if i < len(other.coefficients):
-                    term2 = other.coefficients[i]
-                else:
-                    term2 = 0
-                result_poly.append(term1 + term2)
-        else:
-            poly = Polynomial(other)
-            for i in range(max(len(self.coefficients), len(poly.coefficients))):
-                if i < len(self.coefficients):
-                    term1 = self.coefficients[i]
-                else:
-                    term1 = 0
-                if i < len(poly.coefficients):
-                    term2 = poly.coefficients[i]
-                else:
-                    term2 = 0
-                result_poly.append(term1 + term2)
+        if isinstance(other, Polynomial) is False:
+            other = Polynomial(other)
+        for i in range(max(len(self.coefficients), len(other.coefficients))):
+            if i < len(self.coefficients):
+                term1 = self.coefficients[i]
+            else:
+                term1 = 0
+            if i < len(other.coefficients):
+                term2 = other.coefficients[i]
+            else:
+                term2 = 0
+            result_poly.append(term1 + term2)
+
         return Polynomial(*result_poly)
 
 
     def __radd__(self, other):
-        pass
+        result_poly = []
+        if isinstance(other, Polynomial) is False:
+            other = Polynomial(other)
+        for i in range(max(len(self.coefficients), len(other.coefficients))):
+            if i < len(self.coefficients):
+                term1 = self.coefficients[i]
+            else:
+                term1 = 0
+            if i < len(other.coefficients):
+                term2 = other.coefficients[i]
+            else:
+                term2 = 0
+            result_poly.append(term1 + term2)
+
+        return Polynomial(*result_poly)
 
     def __neg__(self):
         pass
 
     def __sub__(self, other):
         result_poly = []
-        if isinstance(other, Polynomial):
-            for i in range(max(len(self.coefficients), len(other.coefficients))):
-                if i < len(self.coefficients):
-                    term1 = self.coefficients[i]
-                else:
-                    term1 = 0
-                if i < len(other.coefficients):
-                    term2 = other.coefficients[i]
-                else:
-                    term2 = 0
-                result_poly.append(term1 - term2)
-        else:
-            poly = Polynomial(other)
-            for i in range(max(len(self.coefficients), len(poly.coefficients))):
-                if i < len(self.coefficients):
-                    term1 = self.coefficients[i]
-                else:
-                    term1 = 0
-                if i < len(poly.coefficients):
-                    term2 = poly.coefficients[i]
-                else:
-                    term2 = 0
-                result_poly.append(term1 - term2)
+        if isinstance(other, Polynomial) is False:
+            other = Polynomial(other)
+        for i in range(max(len(self.coefficients), len(other.coefficients))):
+            if i < len(self.coefficients):
+                term1 = self.coefficients[i]
+            else:
+                term1 = 0
+            if i < len(other.coefficients):
+                term2 = other.coefficients[i]
+            else:
+                term2 = 0
+            result_poly.append(term1 - term2)
+
         return Polynomial(*result_poly)
 
     def __rsub__(self, other):
-        pass
+        result_poly = []
+        if isinstance(other, Polynomial) is False:
+            other = Polynomial(other)
+        for i in range(max(len(self.coefficients), len(other.coefficients))):
+            if i < len(self.coefficients):
+                term1 = self.coefficients[i]
+            else:
+                term1 = 0
+            if i < len(other.coefficients):
+                term2 = other.coefficients[i]
+            else:
+                term2 = 0
+            result_poly.append(term2 - term1)
+
+        return Polynomial(*result_poly)
 
     def __call__(self, x):
         pass
