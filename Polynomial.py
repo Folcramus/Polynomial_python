@@ -31,76 +31,109 @@ class Polynomial:
         pass
 
     def __add__(self, other):
-        result_poly = []
+        enum = None
+        result_poly = {}
         if isinstance(other, Polynomial) is False:
             other = Polynomial(other)
-        for i in range(max(len(self.coefficients), len(other.coefficients))):
-            if i < len(self.coefficients):
+            if len(self.coefficients) >= len(other.coefficients):
+                enum = self
+            elif len(self.coefficients) < len(other.coefficients):
+                enum = other
+        index = 0
+        for i in enum.coefficients:
+
+            if index < len(self.coefficients):
                 term1 = self.coefficients[i]
             else:
                 term1 = 0
-            if i < len(other.coefficients):
+            if index < len(other.coefficients):
                 term2 = other.coefficients[i]
             else:
                 term2 = 0
-            result_poly.append(term1 + term2)
+            index += 1
+            result_poly.update({i: term1 + term2})
 
-        return Polynomial(*result_poly)
+        return Polynomial(result_poly)
 
 
     def __radd__(self, other):
-        result_poly = []
+        enum = None
+        result_poly = {}
         if isinstance(other, Polynomial) is False:
             other = Polynomial(other)
-        for i in range(max(len(self.coefficients), len(other.coefficients))):
-            if i < len(self.coefficients):
+            if len(self.coefficients) >= len(other.coefficients):
+                enum = self
+            elif len(self.coefficients) < len(other.coefficients):
+                enum = other
+        index = 0
+        for i in enum.coefficients:
+
+            if index < len(self.coefficients):
                 term1 = self.coefficients[i]
             else:
                 term1 = 0
-            if i < len(other.coefficients):
+            if index < len(other.coefficients):
                 term2 = other.coefficients[i]
             else:
                 term2 = 0
-            result_poly.append(term1 + term2)
+            index += 1
+            result_poly.update({i: term1 + term2})
 
-        return Polynomial(*result_poly)
+        return Polynomial(result_poly)
+
 
     def __neg__(self):
         pass
 
     def __sub__(self, other):
-        result_poly = []
+        enum = None
+        result_poly = {}
         if isinstance(other, Polynomial) is False:
             other = Polynomial(other)
-        for i in range(max(len(self.coefficients), len(other.coefficients))):
-            if i < len(self.coefficients):
+            if len(self.coefficients) >= len(other.coefficients):
+                enum = self
+            elif len(self.coefficients) < len(other.coefficients):
+                enum = other
+        index = 0
+        for i in enum.coefficients:
+
+            if index < len(self.coefficients):
                 term1 = self.coefficients[i]
             else:
                 term1 = 0
-            if i < len(other.coefficients):
+            if index < len(other.coefficients):
                 term2 = other.coefficients[i]
             else:
                 term2 = 0
-            result_poly.append(term1 - term2)
+            index+=1
+            result_poly.update({i: term1 - term2})
 
-        return Polynomial(*result_poly)
+        return Polynomial(result_poly)
 
     def __rsub__(self, other):
-        result_poly = []
+        enum = None
+        result_poly = {}
         if isinstance(other, Polynomial) is False:
             other = Polynomial(other)
-        for i in range(max(len(self.coefficients), len(other.coefficients))):
-            if i < len(self.coefficients):
+            if len(self.coefficients) >= len(other.coefficients):
+                enum = self
+            elif len(self.coefficients) < len(other.coefficients):
+                enum = other
+        index = 0
+        for i in enum.coefficients:
+
+            if index < len(self.coefficients):
                 term1 = self.coefficients[i]
             else:
                 term1 = 0
-            if i < len(other.coefficients):
+            if index < len(other.coefficients):
                 term2 = other.coefficients[i]
             else:
                 term2 = 0
-            result_poly.append(term2 - term1)
+            index += 1
+            result_poly.update({i: term2 - term1})
 
-        return Polynomial(*result_poly)
+        return Polynomial(result_poly)
 
     def __call__(self, x):
         pass
