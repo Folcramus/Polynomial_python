@@ -50,10 +50,12 @@ class Polynomial:
         result_poly = {}
         if isinstance(other, Polynomial) is False:
             other = Polynomial(other)
-            if len(self.coefficients) >= len(other.coefficients):
-                enum = self
-            elif len(self.coefficients) < len(other.coefficients):
-                enum = other
+        if len(self.coefficients) >= len(other.coefficients):
+            enum = self
+        elif len(self.coefficients) < len(other.coefficients):
+            enum = other
+        elif len(self.coefficients) == len(other.coefficients):
+            enum = self
         index = 0
         for i in enum.coefficients:
 
@@ -75,10 +77,10 @@ class Polynomial:
         result_poly = {}
         if isinstance(other, Polynomial) is False:
             other = Polynomial(other)
-            if len(self.coefficients) >= len(other.coefficients):
-                enum = self
-            elif len(self.coefficients) < len(other.coefficients):
-                enum = other
+        if len(self.coefficients) >= len(other.coefficients):
+            enum = self
+        elif len(self.coefficients) < len(other.coefficients):
+            enum = other
         index = 0
         for i in enum.coefficients:
 
@@ -105,10 +107,10 @@ class Polynomial:
         result_poly = {}
         if isinstance(other, Polynomial) is False:
             other = Polynomial(other)
-            if len(self.coefficients) >= len(other.coefficients):
-                enum = self
-            elif len(self.coefficients) < len(other.coefficients):
-                enum = other
+        if len(self.coefficients) >= len(other.coefficients):
+            enum = self
+        elif len(self.coefficients) < len(other.coefficients):
+            enum = other
         index = 0
         for i in enum.coefficients:
 
@@ -130,10 +132,10 @@ class Polynomial:
         result_poly = {}
         if isinstance(other, Polynomial) is False:
             other = Polynomial(other)
-            if len(self.coefficients) >= len(other.coefficients):
-                enum = self
-            elif len(self.coefficients) < len(other.coefficients):
-                enum = other
+        if len(self.coefficients) >= len(other.coefficients):
+            enum = self
+        elif len(self.coefficients) < len(other.coefficients):
+            enum = other
         index = 0
         for i in enum.coefficients:
 
