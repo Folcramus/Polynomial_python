@@ -19,13 +19,21 @@ class Polynomial:
             coeff = self.coefficients[degree]
             if coeff != 0:
                 if degree == 0:
-                    result += f"{coeff}"
+                    if coeff > 0:
+                        result += f" + {coeff}"
+                    elif coeff < 0:
+                        result += f" - {-coeff}"
                 elif degree == 1:
-                    result += f"{coeff}x + "
+                    if coeff > 0:
+                        result += f" + {coeff}x"
+                    elif coeff < 0:
+                        result += f" - {-coeff}x"
                 else:
-                    result += f"{coeff}x^{degree} + "
-
-        return result.rstrip(" + ")
+                    if coeff > 0:
+                        result += f" + {coeff}x^{degree}"
+                    elif coeff < 0:
+                        result += f" - {-coeff}x^{degree}"
+        return result.lstrip(' +')
 
     def __eq__(self, other):
         if len(self.coefficients) != len(other.coefficients):
