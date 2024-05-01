@@ -28,7 +28,14 @@ class Polynomial:
         return result.rstrip(" + ")
 
     def __eq__(self, other):
-        pass
+        if len(self.coefficients) != len(other.coefficients):
+            return False
+
+        for key in self.coefficients.keys():
+            if key not in other.coefficients or self.coefficients[key] != other.coefficients[key]:
+                return False
+
+        return True
 
     def __add__(self, other):
         enum = None
@@ -55,7 +62,6 @@ class Polynomial:
 
         return Polynomial(result_poly)
 
-
     def __radd__(self, other):
         enum = None
         result_poly = {}
@@ -81,9 +87,10 @@ class Polynomial:
 
         return Polynomial(result_poly)
 
-
     def __neg__(self):
-        pass
+        for k, i in self.coefficients.items():
+            self.coefficients[k] = -self.coefficients[k]
+        return self
 
     def __sub__(self, other):
         enum = None
@@ -105,7 +112,7 @@ class Polynomial:
                 term2 = other.coefficients[i]
             else:
                 term2 = 0
-            index+=1
+            index += 1
             result_poly.update({i: term1 - term2})
 
         return Polynomial(result_poly)
@@ -136,27 +143,52 @@ class Polynomial:
         return Polynomial(result_poly)
 
     def __call__(self, x):
-        pass
+        result = 0
+        for power, coeff in self.coefficients.items():
+            result += coeff * (x ** power)
+        return result
 
     def degree(self):
         return max(self.coefficients.keys())
 
     def der(self, d=1):
         res = self.coefficients
-        while d!=0 and d>0:
+        while d != 0 and d > 0:
             temp = {}
             for k, i in res.items():
                 if i != 0:
-                    temp.update({k-1: k*i})
-            d-=1
+                    temp.update({k - 1: k * i})
+            d -= 1
             res = temp
         return Polynomial(res)
 
     def __mul__(self, other):
-        pass
+        res = {}
+
+        for deg1, coeff1 in self.coefficients.items():
+            for deg2, coeff2 in other.coefficients.items():
+                new_deg = deg1 + deg2
+                new_coeff = coeff1 * coeff2
+
+                if new_deg in res:
+                    res[new_deg] += new_coeff
+                else:
+                    res[new_deg] = new_coeff
+        return Polynomial(res)
 
     def __rmul__(self, other):
-        pass
+        res = {}
+
+        for deg1, coeff1 in self.coefficients.items():
+            for deg2, coeff2 in other.coefficients.items():
+                new_deg = deg1 + deg2
+                new_coeff = coeff1 * coeff2
+
+                if new_deg in res:
+                    res[new_deg] += new_coeff
+                else:
+                    res[new_deg] = new_coeff
+        return Polynomial(res)
 
     def __iter__(self):
         return self.coefficients.items().__iter__()

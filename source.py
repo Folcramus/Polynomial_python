@@ -1,7 +1,7 @@
 from Polynomial import Polynomial
 
 
-a=  Polynomial(0, 2, 0, 5) - -3
+poly = Polynomial(1, 2, -3)
+print(poly)
+print(-poly)
 
-print(a)
-print(a.degree())
