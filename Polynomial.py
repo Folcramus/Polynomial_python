@@ -1,9 +1,9 @@
 class Polynomial:
 
     def __init__(self, *coefficients):
-        if len(coefficients) == 1 and isinstance(coefficients[0], dict):
+        if isinstance(coefficients[0], dict):
             self.coefficients = coefficients[0]
-        elif len(coefficients) == 1 and isinstance(coefficients[0], list):
+        elif isinstance(coefficients[0], list):
             self.coefficients = {i: coefficients[0][i] for i in range(len(coefficients[0]))}
         else:
             self.coefficients = {i: coefficients[i] for i in range(len(coefficients))}
@@ -17,22 +17,21 @@ class Polynomial:
         result = ""
         for degree in sorted(self.coefficients.keys(), reverse=True):
             coeff = self.coefficients[degree]
-            if coeff != 0:
-                if degree == 0:
-                    if coeff > 0:
-                        result += f" + {coeff}"
-                    elif coeff < 0:
-                        result += f" - {-coeff}"
-                elif degree == 1:
-                    if coeff > 0:
-                        result += f" + {coeff}x"
-                    elif coeff < 0:
-                        result += f" - {-coeff}x"
-                else:
-                    if coeff > 0:
-                        result += f" + {coeff}x^{degree}"
-                    elif coeff < 0:
-                        result += f" - {-coeff}x^{degree}"
+            if degree == 0:
+                if coeff > 0:
+                    result += f" + {coeff}"
+                elif coeff < 0:
+                    result += f" - {-coeff}"
+            elif degree == 1:
+                if coeff > 0:
+                    result += f" + {coeff}x"
+                elif coeff < 0:
+                    result += f" - {-coeff}x"
+            else:
+                if coeff > 0:
+                    result += f" + {coeff}x^{degree}"
+                elif coeff < 0:
+                    result += f" - {-coeff}x^{degree}"
         return result.lstrip(' +')
 
     def __eq__(self, other):
@@ -165,16 +164,17 @@ class Polynomial:
         res = self.coefficients
         while d != 0 and d > 0:
             temp = {}
-            for k, i in res.items():
-                if i != 0:
-                    temp.update({k - 1: k * i})
+            for deg, coeff in res.items():
+                if coeff != 0:
+                    temp.update({deg - 1: deg * coeff})
             d -= 1
             res = temp
         return Polynomial(res)
 
     def __mul__(self, other):
         res = {}
-
+        if isinstance(other, Polynomial) is False:
+            other = Polynomial(other)
         for deg1, coeff1 in self.coefficients.items():
             for deg2, coeff2 in other.coefficients.items():
                 new_deg = deg1 + deg2
@@ -188,7 +188,8 @@ class Polynomial:
 
     def __rmul__(self, other):
         res = {}
-
+        if isinstance(other, Polynomial) is False:
+            other = Polynomial(other)
         for deg1, coeff1 in self.coefficients.items():
             for deg2, coeff2 in other.coefficients.items():
                 new_deg = deg1 + deg2
